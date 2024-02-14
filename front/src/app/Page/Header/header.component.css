@@ -1,0 +1,9 @@
+header{
+  background-color: var(--color-background);
+  color: #FFFFFF;
+}
+
+.btnMenu.active{
+  font-weight: 700;
+  border-bottom-width: 2px;
+}
