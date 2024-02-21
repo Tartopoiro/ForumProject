@@ -3,7 +3,7 @@
     <!--<p class="text-xs font-semibold tracki uppercase">#TailwindCSS</p>-->
     <h1 class="text-4xl font-bold leadi md:text-5xl">Premier Blog !</h1>
     <p class="text-sm">par
-      <a rel="noopener noreferrer" href="#" target="_blank" class="underline">
+      <a rel="noopener noreferrer" routerLink="/user" class="underline">
         <span itemprop="name">Admin</span>
       </a> le
       <time datetime="2024-02-14 15:34:18-0200">14 février 2024</time>
@@ -73,6 +73,15 @@
         <span class="text-xs">14 février 2024</span>
       </div>
     </div>
+  </div>
+
+  <div class="text-white text-center max-w-2xl p-6 rounded-2xl bg-color-background">
+    <form class="col-span-full">
+      <h4 class="text-xl pb-6">Nouveau commentaire : </h4>
+      <textarea id="bio" placeholder="" class="w-full rounded-md focus:ring focus:ri focus:ri text-black dark:bg-neutral-800 dark:text-white" style="min-height: 15vh;"></textarea>
+      <button type="button" class="block px-6 py-2 mt-6 mx-auto font-semibold rounded bg-color-icon color-color-background transition hover:scale-110">Envoyer</button>
+
+    </form>
   </div>
 
 </article>
