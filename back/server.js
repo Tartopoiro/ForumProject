@@ -1,16 +1,30 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000; // Port d'écoute par défaut 3000
+const {requete, connexion, deconnecter} = require("./mysqlConnection");
+const userRoute = require("./routes/userRoute")
 
-// Middleware pour le traitement des requêtes JSON
-app.use(express.json());
-
-// Définir une route
-app.get('/', (req, res) => {
-    res.send('Bienvenue sur mon serveur Express !');
-});
+app.use('/', userRoute);
 
 // Démarrer le serveur
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+
     console.log(`Serveur Express en cours d'exécution sur le port ${PORT}`);
+    connexion();
+
 });
+
+app.get('/api', (req, res) => {
+    res.json({ message: 'test ok' });
+
+});
+
+
+
+
+
+
+
+
+
+
