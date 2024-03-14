@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {UserService} from "../../Services/user/user.service";
 
 @Component({
   selector: 'app-Header',
@@ -14,5 +15,9 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
+
+  constructor(protected user:UserService) {
+  }
 
 }

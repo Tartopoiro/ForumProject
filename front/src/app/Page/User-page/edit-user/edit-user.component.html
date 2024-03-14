@@ -1,18 +1,25 @@
-<section class="p-6 dark:bg-gray-800 dark:text-gray-50">
-  <h1 class="text-center text-2xl mb-16 font-semibold">Modifier Profile</h1>
+<section class="p-6 relative">
+
+  <a routerLink="/profile" class="absolute top-0 left-0 px-8 py-3 font-semibold text-black rounded-xl bg-color-icon m-auto transition hover:scale-105">Retour</a>
+
+
+  <h1 class="text-center text-2xl mb-16 font-semibold">Modifier Profil</h1>
   <form novalidate="" action="" class="container flex flex-col mx-auto space-y-12">
     <div class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
       <div class="col-span-full sm:col-span-3">
         <label for="firstname" class="block text-sm mb-2">Nom</label>
-        <input id="firstname" type="text" placeholder="Nom" class="w-full rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
+        <input id="firstname" type="text" placeholder="Nom" [value]="this.user.get_user?.nom"
+               class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
       </div>
       <div class="col-span-full sm:col-span-3">
         <label for="lastname" class="block text-sm mb-2">Prénom</label>
-        <input id="lastname" type="text" placeholder="Prénom" class="w-full rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
+        <input id="lastname" type="text" placeholder="Prénom" [value]="this.user.get_user?.prenom"
+               class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
       </div>
       <div class="col-span-full sm:col-span-3">
         <label for="email" class="block text-sm mb-2">Adresse email</label>
-        <input id="email" type="email" placeholder="E-mail" class="w-full rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
+        <input id="email" type="email" placeholder="E-mail" [value]="this.user.get_user?.email"
+               class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
       </div>
       <div class="col-span-full sm:col-span-3">
         <label for="bio" class="block text-sm mb-2">Photo</label>
@@ -23,7 +30,7 @@
       </div>
       <div class="col-span-full">
         <label for="bio" class="block text-sm mb-2">Bio</label>
-        <textarea id="bio" placeholder="" class="w-full rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900"></textarea>
+        <textarea id="bio" placeholder="" class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900"></textarea>
       </div>
     </div>
 

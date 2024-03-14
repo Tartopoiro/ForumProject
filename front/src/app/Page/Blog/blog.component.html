@@ -3,9 +3,13 @@
     <!--<p class="text-xs font-semibold tracki uppercase">#TailwindCSS</p>-->
     <h1 class="text-4xl font-bold leadi md:text-5xl">Premier Blog !</h1>
     <p class="text-sm">par
-      <a rel="noopener noreferrer" routerLink="/user" class="underline">
+      <!--
+       <a rel="noopener noreferrer" routerLink="/user/admin" class="underline">
         <span itemprop="name">Admin</span>
-      </a> le
+      </a> --->
+      <span rel="noopener noreferrer" class="underline">
+        <span itemprop="name">Admin</span>
+      </span> le
       <time datetime="2024-02-14 15:34:18-0200">14 février 2024</time>
     </p>
   </div>
@@ -46,13 +50,13 @@
     -->
   </div>
 
-  <h1 class="text-2xl font-bold leadi md:text-3xl">Commentaire :</h1>
+  <h1 class="text-2xl font-bold leadi md:text-3xl">Message :</h1>
 
 
-  <div class="text-white relative flex flex-col max-w-2xl p-6 xl:flex-row rounded-2xl bg-green-400">
+  <div class="text-black relative flex flex-row max-w-2xl p-6 xl:flex-row border-b dark:text-white"><!-- rounded-2xl bg-green-400 --->
     <div class="p-3 space-y-1 w-full">
-      <h3 class="text-3xl font-semibold">NOM Prenom</h3>
-      <p class="text-sm">Bravo à toi !</p>
+      <h3 class="text-3xl font-semibold">Bravo à toi !</h3>
+      <p class="text-sm">NOM Prenom</p>
     </div>
     <div class="flex-col items-center text-center min-w-20 gap-3 p-3">
       <img alt="" src="https://source.unsplash.com/100x100/?portrait" class="object-cover m-auto w-14 h-14 rounded-full shadow">
@@ -62,10 +66,10 @@
     </div>
   </div>
 
-  <div class="text-white relative flex flex-col max-w-2xl p-6 xl:flex-row rounded-2xl bg-green-400">
+  <div class="text-black relative flex flex-row max-w-2xl p-6 xl:flex-row border-b dark:text-white"><!-- rounded-2xl bg-green-400 -->
     <div class="p-3 space-y-1 w-full">
-      <h3 class="text-3xl font-semibold">NOM Prenom</h3>
-      <p class="text-sm">Nice 😉</p>
+      <h3 class="text-3xl font-semibold">Nice 😉</h3>
+      <p class="text-sm">NOM Prenom</p>
     </div>
     <div class="flex-col items-center text-center min-w-20 gap-3 p-3">
       <img alt="" src="https://source.unsplash.com/100x100/?portrait" class="object-cover m-auto w-14 h-14 rounded-full shadow">
@@ -78,7 +82,7 @@
   <div class="text-white text-center max-w-2xl p-6 rounded-2xl bg-color-background">
     <form class="col-span-full">
       <h4 class="text-xl pb-6">Nouveau commentaire : </h4>
-      <textarea id="bio" placeholder="" class="w-full rounded-md focus:ring focus:ri focus:ri text-black dark:bg-neutral-800 dark:text-white" style="min-height: 15vh;"></textarea>
+      <textarea id="newCom" placeholder="" class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri text-black dark:bg-neutral-800 dark:text-white" style="min-height: 15vh;"></textarea>
       <button type="button" class="block px-6 py-2 mt-6 mx-auto font-semibold rounded bg-color-icon color-color-background transition hover:scale-110">Envoyer</button>
 
     </form>

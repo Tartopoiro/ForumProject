@@ -11,7 +11,6 @@ app.listen(PORT, async () => {
 
     console.log(`Serveur Express en cours d'exécution sur le port ${PORT}`);
     connexion();
-
 });
 
 app.get('/api', (req, res) => {

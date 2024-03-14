@@ -21,7 +21,7 @@
            class="btnMenu flex text-lg items-center px-4 hover:border-b-2">Catégorie</a>
       </li>
     </nav>
-    <a rel="noopener noreferrer" routerLink="/" aria-label="Back to homepage" class="flex items-center transition hover:scale-125">
+    <a rel="noopener noreferrer" routerLink="/" aria-label="Back to homepage" class="flex items-center transition hover:scale-125 ">
       <img src="../../../assets/logo_simple.png" alt="Logo" class="w-14 m-auto">
     </a>
     <div class="flex items-center md:space-x-4">
@@ -36,10 +36,18 @@
         <input type="search" name="Search" placeholder="Rechercher..."
                class="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none text-black dark:text-white dark:bg-neutral-800">
       </div>
-      <a type="button"
-         routerLink="/login"
-         class="hidden px-6 py-2 font-semibold rounded lg:block bg-color-icon color-color-background transition hover:scale-110"
-      >Connexion</a>
+      @if (this.user.isConnected()){
+        <a type="button"
+           routerLink="/profile"
+           class="hidden px-6 py-2 font-semibold rounded lg:block bg-color-icon color-color-background transition hover:scale-110"
+        >Mon Profil</a>
+      } @else {
+        <a type="button"
+           routerLink="/login"
+           class="hidden px-6 py-2 font-semibold rounded lg:block bg-color-icon color-color-background transition hover:scale-110"
+        >Connexion</a>
+      }
+
     </div>
     <button title="Open menu" type="button" class="p-4 lg:hidden">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">

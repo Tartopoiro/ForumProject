@@ -1,4 +1,11 @@
-import { Routes } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  Router,
+  RouterModule,
+  RouterStateSnapshot,
+  Routes
+} from '@angular/router';
 import {HomeComponent} from "./Page/Home/home.component";
 import {ErrorComponent} from "./Composant/404/404.component";
 import {BlogComponent} from "./Page/Blog/blog.component";
@@ -6,14 +13,39 @@ import {UserPageComponent} from "./Page/User-page/user-page.component";
 import {LoginComponent} from "./Composant/Login/login.component";
 import {RegisterComponent} from "./Composant/Register/register.component";
 import {EditUserComponent} from "./Page/User-page/edit-user/edit-user.component";
+import {ConnectedGuard, NotConnectedGuard} from "./Guard/connected.guard";
+import {inject, NgModule} from "@angular/core";
+import {UserService} from "./Services/user/user.service";
+import {HttpClient} from "@angular/common/http";
+import {LogoutPageComponent} from "./Composant/logout-page/logout-page.component";
+
+
+
 
 export const routes: Routes = [
 
-  //Home
-  {path: 'login', component:LoginComponent},
+  //Login
+  {path: 'login', component:LoginComponent, canActivate: [NotConnectedGuard]},
 
-  //Home
-  {path: 'signup', component:RegisterComponent},
+  //Signup
+  {path: 'signup', component:RegisterComponent, canActivate: [NotConnectedGuard]},
+
+  //Profile Page
+  {path: 'profile', canActivate:[ConnectedGuard],
+    children:[
+      {
+        path: '',
+        component:UserPageComponent
+      },
+      {
+        path: 'edit',
+        component:EditUserComponent,
+      }
+    ]
+  },
+
+  //Signup
+  {path: 'logout', component:LogoutPageComponent, canActivate: [ConnectedGuard]},
 
   //Home
   {path: '', component:HomeComponent},
@@ -22,10 +54,7 @@ export const routes: Routes = [
   {path: 'blog', component:BlogComponent},
 
   //User Page
-  {path: 'user', component:UserPageComponent},
-
-  //User Page
-  {path: 'user/edit', component:EditUserComponent},
+  //{path: 'user/:name', component:UserPageComponent},
 
 
   //Route pour les erreurs 404
@@ -33,3 +62,5 @@ export const routes: Routes = [
     component:ErrorComponent},
 
 ];
+
+
