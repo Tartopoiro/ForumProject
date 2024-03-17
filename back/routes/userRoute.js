@@ -31,7 +31,22 @@ app.post('/api/user',bodyParser.json(), async (req, res) => {
         res.status(500).send({message : "query failed"});
         console.error('erreur lors de la creation de user ', e);
     }
+});
 
+app.patch('/api/user',bodyParser.json(), async (req, res) => {
+    const mail = req.body['Email'];
+    const nom = req.body['Nom'];
+    const prenom = req.body['Prenom'];
+    const numero = req.body['Numero'];
+
+    try{
+        const query = 'CALL update_user(\''+nom+'\',\''+prenom+'\',\''+mail+'\','+numero+')';
+        await requeteIn(query);
+        res.status(200).send({message : "User created"});
+    }catch (e) {
+        res.status(500).send({message : "query failed"});
+        console.error('erreur lors de la creation de user ', e);
+    }
 
 });
 
