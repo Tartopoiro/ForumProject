@@ -21,11 +21,11 @@ function connexion(){
     });
 }
 
-async function requete(requete) {
+async function requeteOut(requete) {
     try {
 
         const result = await new Promise((resolve, reject) => {
-            connection.query(requete, (error, results, fields) => {
+            connection.query(requete, (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -36,7 +36,23 @@ async function requete(requete) {
 
         return result;
     } catch (error) {
-        console.error('Erreur lors de l\'exécution de la requête :', error);
+        console.error('Erreur lors de l exécution de la requête :', error);
+        throw error; // Renvoyer l'erreur pour la gérer à l'extérieur de la fonction
+    }
+}
+
+async function requeteIn(requete) {
+    try {
+        await new Promise((resolve, reject) => {
+            connection.query(requete, (error, results) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    } catch (error) {
         throw error; // Renvoyer l'erreur pour la gérer à l'extérieur de la fonction
     }
 }
@@ -51,4 +67,4 @@ function deconnecter() {
     });
 }
 
-module.exports = { connexion, deconnecter, requete };
+module.exports = { connexion, deconnecter, requeteOut, requeteIn };
