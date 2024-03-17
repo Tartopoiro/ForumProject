@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {UserService} from "../../Services/user/user.service";
 import {FormsModule} from "@angular/forms";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-Login',
   standalone: true,
   imports: [
     RouterLink,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -19,6 +21,9 @@ export class LoginComponent {
   // @ts-ignore
   interval: NodeJS.Timeout | undefined
 
+  error:boolean = false;
+
+
   constructor(private user: UserService,
               private activatedRoute: ActivatedRoute,
               private router:Router) {
@@ -28,7 +33,11 @@ export class LoginComponent {
   async bConnexion() {
     //console.log("test")
 
-    await this.user.connexion(this.email, false);
+    let connected:boolean = await this.user.connexion(this.email, false);
+
+    if(!connected){
+      this.error = true
+    }
   }
 
   private verificationConnexion(){
@@ -66,4 +75,6 @@ export class LoginComponent {
       count++;
     }, 100); // Vérifie toutes les 0.1 secondes (en millisecondes)
   }
+
+  protected readonly console = console;
 }

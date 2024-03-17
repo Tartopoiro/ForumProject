@@ -35,6 +35,17 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/user`,data);
   }
 
+  public updateUser(user: Utilisateur){
+    let data = {
+      Email:user.email,
+      Nom: user.nom,
+      Prenom: user.prenom,
+      Numero: user.numero
+    }
+
+    return this.http.patch<any>(`${this.apiUrl}/user`,data);
+  }
+
 
   async apiWork() {
     try {

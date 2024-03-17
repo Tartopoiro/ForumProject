@@ -3,26 +3,41 @@
     <h1 class="my-3 text-4xl font-bold">Connexion : </h1>
     <p class="text-sm dark:text-gray-400">Connectez-vous pour accéder à votre compte</p>
   </div>
-  <form novalidate="" action="" class="space-y-12" (submit)="bConnexion()">
+  <form novalidate="" action="" class="space-y-12" (submit)="bConnexion()" >
     <div class="space-y-4">
+      <div *ngIf="emailVerif.invalid && (emailVerif.dirty || emailVerif.touched)"
+           class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">
+        <div *ngIf="emailVerif.errors?.['required'] || emailVerif.errors?.['email']"
+             class="block sm:inline"
+        >
+          Un mail valide est requis pour la connexion
+        </div>
+
+      </div>
+
+      <div *ngIf="emailVerif.valid && error"
+           class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">
+        <div *ngIf="error"
+             class="block sm:inline"
+        >
+          Utilisateur introuvable
+        </div>
+
+      </div>
+
       <div>
         <label for="email" class="block mb-2 text-sm">Adresse email</label>
         <input type="email" name="email" id="email" placeholder="example@email.com"
                class="w-full px-3 py-2 border rounded text-center text-black"
+               required email #emailVerif="ngModel"
                [(ngModel)]="email">
+
       </div>
-      <!--
-      <div>
-        <div class="flex justify-between mb-2">
-          <label for="password" class="text-sm">Mot de passe</label>
-        </div>
-        <input type="password" name="password" id="password" placeholder="*********" class="w-full px-3 py-2 border rounded text-center text-black">
-      </div>
-      -->
     </div>
     <div class="space-y-2">
       <div>
-        <input type="submit" class="block px-8 py-3 font-semibold text-black rounded-xl bg-color-icon w-11/12 m-auto transition cursor-pointer hover:scale-105"
+        <input type="submit" *ngIf="emailVerif.valid"
+               class="block px-8 py-3 font-semibold text-black rounded-xl bg-color-icon w-11/12 m-auto transition cursor-pointer hover:scale-105"
           value="Se connectez"
         />
       </div>

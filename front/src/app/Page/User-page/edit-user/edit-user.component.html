@@ -4,37 +4,45 @@
 
 
   <h1 class="text-center text-2xl mb-16 font-semibold">Modifier Profil</h1>
-  <form novalidate="" action="" class="container flex flex-col mx-auto space-y-12">
+  <form novalidate="" action="" class="container flex flex-col mx-auto space-y-12" [formGroup]="form" (submit)="bUpdate()">
     <div class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
       <div class="col-span-full sm:col-span-3">
         <label for="firstname" class="block text-sm mb-2">Nom</label>
-        <input id="firstname" type="text" placeholder="Nom" [value]="this.user.get_user?.nom"
+        <input id="firstname" type="text" placeholder="Nom" formControlName="firstname"
                class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
       </div>
       <div class="col-span-full sm:col-span-3">
         <label for="lastname" class="block text-sm mb-2">Prénom</label>
-        <input id="lastname" type="text" placeholder="Prénom" [value]="this.user.get_user?.prenom"
+        <input id="lastname" type="text" placeholder="Prénom" formControlName="lastname"
                class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
       </div>
       <div class="col-span-full sm:col-span-3">
         <label for="email" class="block text-sm mb-2">Adresse email</label>
-        <input id="email" type="email" placeholder="E-mail" [value]="this.user.get_user?.email"
+        <input id="email" type="email" placeholder="E-mail" formControlName="email"
                class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
       </div>
       <div class="col-span-full sm:col-span-3">
-        <label for="bio" class="block text-sm mb-2">Photo</label>
+        <label class="block text-sm mb-2">Photo</label>
         <div class="flex items-center space-x-2">
           <img src="assets/logo_simple.png" alt="" class="w-10 h-10 rounded-full bg-color-background">
-          <button type="button" class="px-4 py-2 border rounded-md dark:border-gray-100">Changer</button>
+          <!--<button type="button" class="px-4 py-2 border rounded-md dark:border-gray-100">Changer</button>-->
         </div>
       </div>
-      <div class="col-span-full">
+
+      <div class="col-span-full sm:col-span-2">
+        <label for="phonenumber" class="block text-sm mb-2">Numéro</label>
+        <input id="phonenumber" type="number" placeholder="0612345678" formControlName="number"
+               class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
+      </div>
+
+      <!--<div class="col-span-full">
         <label for="bio" class="block text-sm mb-2">Bio</label>
         <textarea id="bio" placeholder="" class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900"></textarea>
-      </div>
+      </div>-->
     </div>
 
-    <button type="button" class="block px-8 py-3 font-semibold text-black rounded-xl bg-color-icon w-11/12 m-auto transition hover:scale-105">Envoyer</button>
+    <input type="submit" value="Envoyer"
+           class="block px-8 py-3 font-semibold text-black rounded-xl bg-color-icon w-11/12 m-auto cursor-pointer transition hover:scale-105" />
 
   </form>
 </section>

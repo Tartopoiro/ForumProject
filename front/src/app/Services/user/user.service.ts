@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {ApiService} from "../api/api-service.service";
 import {Utilisateur} from "../../Class/Utilisateur/utilisateur";
 import {CanActivateFn, Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -54,11 +55,38 @@ export class UserService {
         }
       })
     }
+
+    return this.connected;
   }
 
   public async inscription(utilisateur: Utilisateur) {
     if (await this.api.apiWork()) {
-      this.api.createUser(utilisateur).subscribe((data: any) => {
+      this.api.createUser(utilisateur).subscribe( {
+        next: (data: any) => {
+          // Debug
+          //console.log(data)
+
+          this.user = utilisateur;
+          this.connected = true
+
+          this.router.navigateByUrl("/")
+
+          localStorage.setItem("email", this.user.email);
+          localStorage.setItem("dateCo", String(Date.now()))
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Erreur HTTP :', error.status);
+          this.connected = false;
+        }
+      })
+    }
+
+    return this.connected;
+  }
+
+  public async mettreAJourProfil(utilisateur: Utilisateur){
+    if (await this.api.apiWork()) {
+      this.api.updateUser(utilisateur).subscribe((data: any) => {
         console.log(data);
         /*if(data && data[0] && data[0][0]){
           this.user = new Utilisateur(data[0][0]);
@@ -92,7 +120,10 @@ export class UserService {
   }
 
   get get_user(){
-    return this.user;
+    if(this.user != undefined)
+      return this.user;
+
+    return new Utilisateur({})
   }
 
 }

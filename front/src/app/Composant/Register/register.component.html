@@ -5,36 +5,87 @@
   </div>
   <form novalidate="" action="" class="space-y-12" (submit)="bInscription()">
     <div class="space-y-4">
+      <div
+        *ngIf="(nomVerif.dirty || nomVerif.touched) && nomVerif.invalid ||
+(prenomVerif.dirty || prenomVerif.touched) && prenomVerif.invalid ||
+(numeroVerif.dirty || numeroVerif.touched) && numeroVerif.invalid ||
+(emailVerif.dirty || emailVerif.touched) && emailVerif.invalid ||
+this.error
+"
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">
+
+        Il y a une ou plusieurs erreur(s) : <br>
+
+        <div *ngIf="(nomVerif.dirty || nomVerif.touched) &&
+        (nomVerif.errors?.['required'] || nomVerif.errors?.['minlength'])"
+             class="block sm:inline"
+        >
+          - nom valide requis <br>
+        </div>
+
+         <div *ngIf="(prenomVerif.dirty || prenomVerif.touched) &&
+         (prenomVerif.errors?.['required'] || prenomVerif.errors?.['minlength'])"
+             class="block sm:inline"
+        >
+          - prenom valide requis <br>
+        </div>
+
+        <div *ngIf="(numeroVerif.dirty || numeroVerif.touched) &&
+        (numeroVerif.errors?.['required'] || numeroVerif.errors?.['min'] || numeroVerif.errors?.['max'])"
+             class="block sm:inline"
+        >
+          - numéro valide requis <br>
+        </div>
+
+        <div *ngIf="(emailVerif.dirty || emailVerif.touched) &&
+        (emailVerif.errors?.['required'] || emailVerif.errors?.['email'])"
+             class="block sm:inline"
+        >
+          - mail valide requis <br>
+        </div>
+
+        <div *ngIf="(this.error)"
+             class="block sm:inline"
+        >
+          Utilisateur déjà utilisée
+        </div>
+
+      </div>
+
       <div>
         <label for="firstname" class="block mb-2 text-sm">Nom</label>
-        <input type="text" name="firstname" id="firstname" placeholder="Jean" [(ngModel)]="this.utilisateur.nom"
+        <input type="text" name="firstname" id="firstname" placeholder="Jean"
+               required minlength="4" #nomVerif=ngModel
+               [(ngModel)]="this.utilisateur.nom"
                class="w-full px-3 py-2 border rounded text-center text-black">
       </div>
       <div>
         <label for="lastname" class="block mb-2 text-sm">Prenom</label>
-        <input type="text" name="lastname" id="lastname" placeholder="DURANT" [(ngModel)]="this.utilisateur.prenom"
+        <input type="text" name="lastname" id="lastname" placeholder="DURANT"
+               required minlength="4" #prenomVerif=ngModel
+               [(ngModel)]="this.utilisateur.prenom"
                class="w-full px-3 py-2 border rounded text-center text-black">
       </div>
       <div>
         <label for="phonenumber" class="block mb-2 text-sm">Numéro</label>
-        <input type="number" name="phonenumber" id="phonenumber" placeholder="0612345678" [(ngModel)]="this.utilisateur.numero"
+        <input type="number" name="phonenumber" id="phonenumber" placeholder="0612345678"
+               required min="0600000000" max=0799999999 #numeroVerif=ngModel
+               [(ngModel)]="this.utilisateur.numero"
                class="w-full px-3 py-2 border rounded text-center text-black">
       </div>
       <div>
         <label for="email" class="block mb-2 text-sm">Adresse email</label>
-        <input type="email" name="email" id="email" placeholder="example@email.com" [(ngModel)]="this.utilisateur.email"
+        <input type="email" name="email" id="email" placeholder="example@email.com"
+               required email #emailVerif="ngModel"
+               [(ngModel)]="this.utilisateur.email"
                class="w-full px-3 py-2 border rounded text-center text-black">
       </div>
-      <!--<div>
-        <div class="flex justify-between mb-2">
-          <label for="password" class="text-sm">Mot de passe</label>
-        </div>
-        <input type="password" name="password" id="password" placeholder="*********" class="w-full px-3 py-2 border rounded text-center text-black">
-      </div>-->
     </div>
     <div class="space-y-2">
       <div>
         <input type="submit" value="S'inscrire"
+               *ngIf="nomVerif.valid && prenomVerif.valid
+               && numeroVerif.valid && emailVerif.valid"
                class="block px-8 py-3 font-semibold text-black rounded-xl bg-color-icon w-11/12 m-auto cursor-pointer transition hover:scale-105"
         />
       </div>
