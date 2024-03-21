@@ -14,8 +14,19 @@ app.get('/api/user', async (req, res) => {
         res.status(404).send({message : "user non trouvé"});
         console.error('erreur lors de la recherche de user ', e);
     }
-
 });
+
+app.get('/api/users', async (req, res) => {
+    try{
+        const query = 'call getUsers()';
+        const result = await requeteOut(query);
+        res.json(result);
+    } catch (e) {
+        res.status(404).send({message : "requete echoué"});
+        console.error('erreur lors de la recherche des users ', e);
+    }
+});
+
 
 app.post('/api/user',bodyParser.json(), async (req, res) => {
     const mail = req.body['Email'];
