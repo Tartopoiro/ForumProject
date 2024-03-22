@@ -30,12 +30,15 @@ export class LoginComponent {
     this.startPeriodicCheck();
   }
 
+
+
   async bConnexion() {
     //console.log("test")
+    await this.user.connexion(this.email, false);
 
-    let connected:boolean = await this.user.connexion(this.email, false);
+    await new Promise(r => setTimeout(r, 100));
 
-    if(!connected){
+    if(!this.user.isConnected()){
       this.error = true
     }
   }
@@ -77,4 +80,8 @@ export class LoginComponent {
   }
 
   protected readonly console = console;
+
+  resetError() {
+    this.error = false
+  }
 }

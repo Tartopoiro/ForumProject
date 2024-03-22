@@ -49,14 +49,13 @@ export class UserService {
 
           //Debug
           //console.log(this)
+
         }else{
           console.log("user introuvable !")
           this.connected = false
         }
       })
     }
-
-    return this.connected;
   }
 
   public async inscription(utilisateur: Utilisateur) {
@@ -88,22 +87,19 @@ export class UserService {
     if (await this.api.apiWork()) {
       this.api.updateUser(utilisateur).subscribe((data: any) => {
         console.log(data);
-        /*if(data && data[0] && data[0][0]){
-          this.user = new Utilisateur(data[0][0]);
-          this.connected = true
 
-          this.router.navigateByUrl("/")
-          console.log("Connecté !")
+        if(data.message && data.message == "User created"){
 
-          localStorage.setItem("email", mail);
-          localStorage.setItem("dateCo", String(Date.now()))
+          if(this.user?.id_Utilisateur)
+            utilisateur.id_Utilisateur = this.user?.id_Utilisateur
 
-          //Debug
-          //console.log(this)
-        }else{
-          console.log("user introuvable !")
-          this.connected = false
-        }*/
+          // Debug
+          //console.log(utilisateur)
+
+          this.user = utilisateur;
+
+          this.router.navigateByUrl('profile')
+        }
       })
     }
   }

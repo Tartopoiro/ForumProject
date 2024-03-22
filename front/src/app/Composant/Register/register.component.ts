@@ -22,17 +22,20 @@ export class RegisterComponent {
 
   error:boolean = false
 
-  constructor(private userService:UserService) {
+  constructor(private user: UserService,
+              private userService:UserService) {
     this.utilisateur = new Utilisateur({})
   }
 
   async bInscription() {
     console.log(this.utilisateur)
 
-    let connected:boolean = await this.userService.inscription(this.utilisateur);
+    await this.userService.inscription(this.utilisateur);
 
+    await new Promise(r => setTimeout(r, 100));
 
-    if(!connected)
-      this.error=true;
+    if (!this.user.isConnected()) {
+      this.error = true
+    }
   }
 }

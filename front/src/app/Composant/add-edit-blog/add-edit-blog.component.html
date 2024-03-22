@@ -1,0 +1,62 @@
+<section class="p-6 relative">
+
+  <a routerLink=".." class="absolute top-0 left-0 px-8 py-3 font-semibold text-black rounded-xl bg-color-icon m-auto transition hover:scale-105">Retour</a>
+
+  @if(this.edit){
+    <h1 class="text-center text-2xl mb-16 font-semibold">Modifier Blog</h1>
+
+    <span class="absolute top-0 right-0 fill-red-400 dark:text-gray-400 cursor-pointer" (click)="this.api.deleteBlog(this.blogTmp.Id_Blog+'').subscribe()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" id="delete-alt" class="icon glyph"><path d="M17,4V5H15V4H9V5H7V4A2,2,0,0,1,9,2h6A2,2,0,0,1,17,4Z"/><path d="M20,6H4A1,1,0,0,0,4,8H5V20a2,2,0,0,0,2,2H17a2,2,0,0,0,2-2V8h1a1,1,0,0,0,0-2ZM11,17a1,1,0,0,1-2,0V11a1,1,0,0,1,2,0Zm4,0a1,1,0,0,1-2,0V11a1,1,0,0,1,2,0Z"/>
+      </svg>
+    </span>
+  } @else {
+    <h1 class="text-center text-2xl mb-16 font-semibold">Ajouter Blog</h1>
+  }
+
+  <form novalidate="" action="" class="container flex flex-col mx-auto space-y-12" [formGroup]="form" (submit)="bSend()">
+    <div class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+      <div class="col-span-full sm:col-span-3">
+        <label for="title" class="block text-sm mb-2">Titre</label>
+        <input id="title" type="text" placeholder="Titre" formControlName="title"
+               class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
+      </div>
+      <div class="col-span-full sm:col-span-1">
+        <label for="access" class="block text-sm mb-2">Public</label>
+        <div class="inline-flex items-center">
+          <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="access">
+            <input type="checkbox"
+                   class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-green-500 before:opacity-0 before:transition-opacity checked:border-green-950 checked:bg-green-950 checked:before:bg-green-950 hover:before:opacity-10"
+                   id="access" formControlName="access" checked />
+            <span
+                    class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
+                   stroke="currentColor" stroke-width="1">
+                <path fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"></path>
+              </svg>
+            </span>
+          </label>
+        </div>
+
+
+      </div>
+      <div class="col-span-full sm:col-span-3">
+        <label for="dateC" class="block text-sm mb-2">Date de Creation</label>
+        <input id="dateC" type="date" placeholder="Date de Creation" formControlName="dateC"
+               class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
+      </div>
+      <div class="col-span-full">
+        <label for="description" class="block text-sm mb-2">Descriptif</label>
+        <textarea id="description" placeholder="Descriptif" formControlName="description"
+                  class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
+        </textarea>
+      </div>
+
+    </div>
+
+    <input type="submit" value="Envoyer"
+           class="block px-8 py-3 font-semibold text-black rounded-xl bg-color-icon w-11/12 m-auto cursor-pointer transition hover:scale-105" />
+
+  </form>
+</section>

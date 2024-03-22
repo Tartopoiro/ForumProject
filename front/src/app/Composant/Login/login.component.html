@@ -30,7 +30,9 @@
         <input type="email" name="email" id="email" placeholder="example@email.com"
                class="w-full px-3 py-2 border rounded text-center text-black"
                required email #emailVerif="ngModel"
-               [(ngModel)]="email">
+               [(ngModel)]="email"
+               (ngModelChange)="resetError()"
+        >
 
       </div>
     </div>

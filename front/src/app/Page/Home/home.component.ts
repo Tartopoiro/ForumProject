@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {UserService} from "../../Services/user/user.service";
 
 @Component({
   selector: 'app-Home',
@@ -11,5 +12,8 @@ import {RouterLink} from "@angular/router";
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+  constructor(protected user:UserService) {
+  }
 
 }

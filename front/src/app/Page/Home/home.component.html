@@ -5,7 +5,11 @@
     </h1>
     <p class="px-8 mt-8 mb-12 text-lg">Et pas que ça ... 🤫🤫</p>
     <div class="flex flex-wrap justify-center">
-      <a routerLink="/signup"  class="px-8 py-3 m-2 text-lg font-semibold rounded bg-color-icon color-color-background transition hover:scale-110">Commencer</a>
+      @if (user.isConnected()){
+        <a routerLink="/profile/newBlog"  class="px-8 py-3 m-2 text-lg font-semibold rounded bg-color-icon color-color-background transition hover:scale-110">Commencer</a>
+      }@else{
+        <a routerLink="/signup"  class="px-8 py-3 m-2 text-lg font-semibold rounded bg-color-icon color-color-background transition hover:scale-110">Commencer</a>
+      }
       <a routerLink="/blog" class="px-8 py-3 m-2 text-lg border rounded transition hover:scale-110">Voir un exemple</a>
     </div>
   </div>

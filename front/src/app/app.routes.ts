@@ -18,8 +18,7 @@ import {inject, NgModule} from "@angular/core";
 import {UserService} from "./Services/user/user.service";
 import {HttpClient} from "@angular/common/http";
 import {LogoutPageComponent} from "./Composant/logout-page/logout-page.component";
-
-
+import {AddEditBlogComponent} from "./Composant/add-edit-blog/add-edit-blog.component";
 
 
 export const routes: Routes = [
@@ -40,6 +39,10 @@ export const routes: Routes = [
       {
         path: 'edit',
         component:EditUserComponent,
+      },
+      {
+        path: 'newBlog',
+        component:AddEditBlogComponent,
       }
     ]
   },
@@ -51,7 +54,28 @@ export const routes: Routes = [
   {path: '', component:HomeComponent},
 
   //Blog
-  {path: 'blog', component:BlogComponent},
+  {path: 'blog',
+    children:[
+      {
+        path: '',
+        component:BlogComponent
+      },
+      {
+        path: ':idBlog',
+        children:[
+          {
+            path:'',
+            component: BlogComponent
+          },
+          {
+            path:"edit",
+            component:AddEditBlogComponent,
+            canActivate:[ConnectedGuard]
+          }
+        ]
+      }
+    ]
+  },
 
   //User Page
   //{path: 'user/:name', component:UserPageComponent},

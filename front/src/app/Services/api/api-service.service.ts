@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Utilisateur} from "../../Class/Utilisateur/utilisateur";
+import {Blog} from "../../Class/Blog/blog";
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +47,48 @@ export class ApiService {
     return this.http.patch<any>(`${this.apiUrl}/user`,data);
   }
 
+  public getBlogById(id: string){
+    return this.http.get<any>(`${this.apiUrl}/blog?idblog=${id}`);
+  }
 
+  public createBlog(blog: Blog){
+    // de _public --> Public
+    //Permet cohérence avec l'API get
+
+    //Public, Titre, Descriptif, IdUser
+    let data = {
+      Public:blog.Public ? 1 : 0,
+      Titre: blog.Titre,
+      Descriptif: blog.Descriptif,
+      IdUser: blog.Id_Utilisateur
+    }
+
+    return this.http.post<any>(`${this.apiUrl}/blog`,data);
+  }
+
+  public updateBlog(blog: Blog){
+    let data = {
+      IdBlog:blog.Id_Blog,
+      Public:blog.Public ? 1 : 0,
+      Titre: blog.Titre,
+      Descriptif: blog.Descriptif,
+      IdUser: blog.Id_Utilisateur
+    }
+
+    return this.http.patch<any>(`${this.apiUrl}/blog`,data);
+  }
+
+  public deleteBlog(id: string){
+    return this.http.get<any>(`${this.apiUrl}/deleteblog?idblog=${id}`);
+  }
+
+  public getUsers(){
+    return this.http.get<any>(`${this.apiUrl}/users`);
+  }
+
+  public getUserBlog(id: string){
+    return this.http.get<any>(`${this.apiUrl}/userblog?iduser=${id}`);
+  }
   async apiWork() {
     try {
       let result = await this.http.get<any>(`${this.apiUrl}/`).toPromise();

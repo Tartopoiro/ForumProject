@@ -72,4 +72,4 @@ app.get('/api/deleteblog', async (req, res) => {
 });
 
 
-
+module.exports = app;
