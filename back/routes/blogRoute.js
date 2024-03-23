@@ -4,9 +4,10 @@ const app = express();
 const bodyParser = require('body-parser');
 
 app.get('/api/blog', async (req, res) => {
-    const id = req.query.idblog;
+    const user = req.body['IdUser'];
+    const blog = req.body['IdBlog'];
     try{
-        const query = 'call getBlogFromId(\''+id+'\')';
+        const query = 'call getBlogIfAccessibleFromUser('+user+','+blog+')';
         const result = await requeteOut(query);
         res.json(result);
     } catch (e) {
@@ -22,7 +23,7 @@ app.post('/api/blog', bodyParser.json(), async (req,res)=>{
     const descriptif = req.body['Descriptif'];
 
     try{
-        const query = 'CALL create_blog(\''+public+'\',\''+titre+'\',\''+descriptif+'\','+user+')';
+        const query = 'CALL create_blog('+public+',\''+titre+'\',\''+descriptif+'\','+user+')';
         await requeteIn(query);
         res.status(200).send({message : "Blog created"});
     }catch (e) {
@@ -38,7 +39,7 @@ app.patch('/api/blog', bodyParser.json(), async (req,res)=>{
     const descriptif = req.body['Descriptif'];
 
     try{
-        const query = 'CALL update_blog(\''+blog+'\',\''+public+'\',\''+titre+'\',\''+descriptif+'\')';
+        const query = 'CALL update_blog('+blog+','+public+',\''+titre+'\',\''+descriptif+'\')';
         await requeteIn(query);
         res.status(200).send({message : "Blog created"});
     }catch (e) {
@@ -50,7 +51,7 @@ app.patch('/api/blog', bodyParser.json(), async (req,res)=>{
 app.get('/api/userblog', async (req, res) => {
     const id = req.query.iduser;
     try{
-        const query = 'call getBlogsFromUser(\''+id+'\')';
+        const query = 'call getBlogsFromUser('+id+')';
         const result = await requeteOut(query);
         res.json(result);
     } catch (e) {
@@ -62,7 +63,7 @@ app.get('/api/userblog', async (req, res) => {
 app.get('/api/deleteblog', async (req, res) => {
     const id = req.query.idblog;
     try{
-        const query = 'call delete_blog(\''+id+'\')';
+        const query = 'call delete_blog('+id+')';
         await requeteIn(query);
         res.status(404).send({message : "supression OK"});
     } catch (e) {

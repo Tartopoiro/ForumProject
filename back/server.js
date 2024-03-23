@@ -4,10 +4,11 @@ const PORT = process.env.PORT || 3000; // Port d'écoute par défaut 3000
 const { connexion, deconnecter} = require("./mysqlConnection");
 const userRoute = require("./routes/userRoute")
 const blogRoute = require("./routes/blogRoute")
+const accesRoute = require("./routes/accesRoute")
 
 app.use('/', userRoute);
 app.use('/', blogRoute);
-
+app.use('/', accesRoute);
 
 // Démarrer le serveur
 app.listen(PORT, async () => {
