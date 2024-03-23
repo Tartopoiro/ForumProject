@@ -63,8 +63,8 @@ app.get('/api/deleteblog', async (req, res) => {
     const id = req.query.idblog;
     try{
         const query = 'call delete_blog(\''+id+'\')';
-        const result = await requeteOut(query);
-        res.json(result);
+        await requeteIn(query);
+        res.status(404).send({message : "supression OK"});
     } catch (e) {
         res.status(404).send({message : "echec de la supression"});
         console.error('erreur lors de la suppression de blog ', e);
