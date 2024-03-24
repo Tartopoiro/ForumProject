@@ -6,9 +6,11 @@ const { connexion, deconnecter} = require("./mysqlConnection");
 const userRoute = require("./routes/userRoute")
 const blogRoute = require("./routes/blogRoute")
 const accesRoute = require("./routes/accesRoute")
+const messageRoute = require("./routes/messageRoute")
 app.use('/', userRoute);
 app.use('/', blogRoute);
 app.use('/', accesRoute);
+app.use('/', messageRoute);
 
 // Demarrage du serveur
 app.listen(PORT, async () => {
