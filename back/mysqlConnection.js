@@ -1,8 +1,8 @@
-
+//Classe de connexion à la BdD, permet egalement l'execution de requete
 
 const mysql = require('mysql');
 const {RowDataPacket} = require("mysql/lib/protocol/packets");
-
+//Parametre de connexion
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     port: 3306,
@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
     password: 'Meaux2Passe',
     database: 'triceratops_bd'
 });
-
+//Fonction de connexion avec gestion d'erreur
 function connexion(){
     connection.connect((err) => {
         if (err) {
@@ -20,7 +20,7 @@ function connexion(){
         console.log('Connecté à la base de données MySQL');
     });
 }
-
+//Execute une requete en parametre avec la mise en forme du resultat
 async function requeteOut(requete) {
     try {
 
@@ -37,10 +37,10 @@ async function requeteOut(requete) {
         return result;
     } catch (error) {
         console.error('Erreur lors de l exécution de la requête :', error);
-        throw error; // Renvoyer l'erreur pour la gérer à l'extérieur de la fonction
+        throw error;
     }
 }
-
+//Execute une requete en parametre sans resultats hormis l'erreur si necessaire
 async function requeteIn(requete) {
     try {
         await new Promise((resolve, reject) => {
@@ -53,10 +53,10 @@ async function requeteIn(requete) {
             });
         });
     } catch (error) {
-        throw error; // Renvoyer l'erreur pour la gérer à l'extérieur de la fonction
+        throw error;
     }
 }
-
+// deconnecte la BdD
 function deconnecter() {
     connection.end((err) => {
         if (err) {

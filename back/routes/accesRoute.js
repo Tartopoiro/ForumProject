@@ -5,14 +5,14 @@ const bodyParser = require('body-parser');
 
 
 app.get('/api/acces', async (req, res) => {
-    const id = req.query.iduser;
+    const id = req.query.idblog;
     try{
-        const query = 'call getBlogAccessibleFromId('+id+')';
+        const query = 'call getAccessFromBlog('+id+')';
         const result = await requeteOut(query);
         res.json(result);
     } catch (e) {
-        res.status(404).send({message : "blog non trouvé"});
-        console.error('erreur lors de la recherche de blog ', e);
+        res.status(404).send({message : "accès non trouvé"});
+        console.error('erreur lors de la recherche des accès ', e);
     }
 });
 app.post('/api/acces', bodyParser.json(), async (req,res)=>{

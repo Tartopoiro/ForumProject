@@ -60,6 +60,18 @@ app.get('/api/userblog', async (req, res) => {
     }
 });
 
+app.get('/api/accessibleblog', async (req, res) => {
+    const id = req.query.iduser;
+    try{
+        const query = 'call getBlogsAccessibleFromUser('+id+')';
+        const result = await requeteOut(query);
+        res.json(result);
+    } catch (e) {
+        res.status(404).send({message : "blogs non trouvé"});
+        console.error('erreur lors de la recherche de blog accessible par le user', e);
+    }
+});
+
 app.get('/api/deleteblog', async (req, res) => {
     const id = req.query.idblog;
     try{
