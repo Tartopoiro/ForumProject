@@ -10,6 +10,7 @@ import {UserService} from "../../Services/user/user.service";
 export class LogoutPageComponent {
 
   constructor(private userSerivce:UserService) {
+    // Deconnexion du user
     this.userSerivce.logout()
   }
 

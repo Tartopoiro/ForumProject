@@ -1,9 +1,4 @@
 import {
-  ActivatedRouteSnapshot,
-  CanActivateFn,
-  Router,
-  RouterModule,
-  RouterStateSnapshot,
   Routes
 } from '@angular/router';
 import {HomeComponent} from "./Page/Home/home.component";
@@ -14,9 +9,6 @@ import {LoginComponent} from "./Composant/Login/login.component";
 import {RegisterComponent} from "./Composant/Register/register.component";
 import {EditUserComponent} from "./Page/User-page/edit-user/edit-user.component";
 import {ConnectedGuard, NotConnectedGuard} from "./Guard/connected.guard";
-import {inject, NgModule} from "@angular/core";
-import {UserService} from "./Services/user/user.service";
-import {HttpClient} from "@angular/common/http";
 import {LogoutPageComponent} from "./Composant/logout-page/logout-page.component";
 import {AddEditBlogComponent} from "./Composant/add-edit-blog/add-edit-blog.component";
 
@@ -76,10 +68,6 @@ export const routes: Routes = [
       }
     ]
   },
-
-  //User Page
-  //{path: 'user/:name', component:UserPageComponent},
-
 
   //Route pour les erreurs 404
   {path: '**', pathMatch: 'full',

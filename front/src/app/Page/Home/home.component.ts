@@ -8,12 +8,10 @@ import {UserService} from "../../Services/user/user.service";
   imports: [
     RouterLink
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
 
-  constructor(protected user:UserService) {
-  }
-
+  //Constructeur du composant, injecte la dépendance UserService
+  constructor(protected user:UserService) { }
 }

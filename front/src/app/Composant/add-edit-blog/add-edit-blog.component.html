@@ -5,7 +5,7 @@
   @if(this.edit){
     <h1 class="text-center text-2xl mb-16 font-semibold">Modifier Blog</h1>
 
-    <span class="absolute top-0 right-0 fill-red-400 dark:text-gray-400 cursor-pointer" (click)="this.api.deleteBlog(this.blogTmp.Id_Blog+'').subscribe()">
+    <span class="absolute top-0 right-0 fill-red-400 dark:text-gray-400 cursor-pointer" (click)="supBlog()">
       <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" id="delete-alt" class="icon glyph"><path d="M17,4V5H15V4H9V5H7V4A2,2,0,0,1,9,2h6A2,2,0,0,1,17,4Z"/><path d="M20,6H4A1,1,0,0,0,4,8H5V20a2,2,0,0,0,2,2H17a2,2,0,0,0,2-2V8h1a1,1,0,0,0,0-2ZM11,17a1,1,0,0,1-2,0V11a1,1,0,0,1,2,0Zm4,0a1,1,0,0,1-2,0V11a1,1,0,0,1,2,0Z"/>
       </svg>
     </span>
@@ -23,7 +23,7 @@
       <div class="col-span-full sm:col-span-1">
         <label for="access" class="block text-sm mb-2">Public</label>
         <div class="inline-flex items-center">
-          <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="access">
+          <label class="relative flex items-center p-3 rounded-full cursor-pointer" >
             <input type="checkbox"
                    class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-green-500 before:opacity-0 before:transition-opacity checked:border-green-950 checked:bg-green-950 checked:before:bg-green-950 hover:before:opacity-10"
                    id="access" formControlName="access" checked />
@@ -59,4 +59,52 @@
            class="block px-8 py-3 font-semibold text-black rounded-xl bg-color-icon w-11/12 m-auto cursor-pointer transition hover:scale-105" />
 
   </form>
+
+  @if (this.edit && !this.blogTmp.Public){
+    <h2 class="text-center text-lg m-16 font-semibold">Modifier les accès utilisateurs</h2>
+
+    <!--[formGroup]="form" (submit)="bSend()"-->
+    <form novalidate="" action="" class="container flex flex-col mx-auto space-y-12" (submit)="this.AddUser()">
+      <div class="grid grid-cols-4 gap-6 col-span-full lg:col-span-3">
+        <div class="col-span-full text-center">
+          <span class="text-lg mt-2 text-center">Ajouter un utilsateur : </span>
+        </div>
+        <div class="col-span-full sm:col-span-2 relative">
+          <input id="addUser" type="text" placeholder="nom ou prenom" [formControl]="this.inputSearch" (click)="this.userFind.updateListeNom()"
+                 class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri border-2 p-2 dark:border-gray-700 dark:text-gray-900">
+          <div class="absolute z-10 top-11 w-full text-center rounded-lg overflow-hidden">
+            <!-- *ngFor="let entry of this.getKeys(this.listSearch)" -->
+
+            @for(entry of this.getKeys(this.listSearch); track entry[0]){
+              <span class="block bg-white text-black cursor-pointer hover:bg-black hover:text-white" (click)="this.setUserAdd(entry[0],entry[1])">{{ entry[1] }}</span>
+            }
+            <!-- (click)="this.setUserAdd(entry[0],entry[1])" -->
+
+          </div>
+        </div>
+        <div class="col-span-full sm:col-span-2">
+          <input type="submit" value="Envoyer"
+                 class="block px-8 py-3 font-semibold text-black rounded-xl bg-color-icon w-11/12 m-auto cursor-pointer transition hover:scale-105" />
+        </div>
+
+        <div class="col-span-full text-center mt-12">
+          <span class="text-lg mt-2 text-center">Liste utilsateurs : </span>
+        </div>
+        <div class="col-span-full w-min m-auto">
+          @for(entry of this.getListUser(this.listUserBlog);track entry[0]){
+            <div class="flex gap-10 ">
+              <span class="w-max">{{ this.userFind.getNomComplet(entry[1]) }}</span>
+              <span class="cursor-pointer" (click)="removeUser(entry[1])">Supprimer</span>
+            </div>
+          }
+
+          @if(this.getListUser(this.listUserBlog).length === 0){
+            <div class="flex gap-10 ">
+              <span class="w-max">Aucun Utilisateur</span>
+            </div>
+          }
+        </div>
+      </div>
+    </form>
+  }
 </section>

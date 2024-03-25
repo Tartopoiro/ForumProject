@@ -1,79 +1,126 @@
 <article class="max-w-2xl px-6 py-24 mx-auto space-y-12">
-  <div class="relative w-full mx-auto space-y-4 text-center">
-    <!--<p class="text-xs font-semibold tracki uppercase">#TailwindCSS</p>-->
+  @if (this.blog.Id_Blog != null ){
+    <div class="relative w-full mx-auto space-y-4 text-center">
+      <!--<p class="text-xs font-semibold tracki uppercase">#TailwindCSS</p>-->
+      @if(this.blog.Id_Utilisateur === this.user.get_user.id_Utilisateur && this.user.isConnected()){
+        <a routerLink="./edit" class="absolute top-0 right-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" fill="none">
+            <path opacity="0.4" d="M15.48 3H7.52C4.07 3 2 5.06 2 8.52V16.47C2 19.94 4.07 22 7.52 22H15.47C18.93 22 20.99 19.94 20.99 16.48V8.52C21 5.06 18.93 3 15.48 3Z" fill="#182524"/>
+            <path d="M21.0195 2.97979C19.2295 1.17979 17.4795 1.13979 15.6395 2.97979L14.5095 4.09979C14.4095 4.19979 14.3795 4.33979 14.4195 4.46979C15.1195 6.91979 17.0795 8.87979 19.5295 9.57979C19.5595 9.58979 19.6095 9.58979 19.6395 9.58979C19.7395 9.58979 19.8395 9.54979 19.9095 9.47979L21.0195 8.35979C21.9295 7.44979 22.3795 6.57979 22.3795 5.68979C22.3795 4.78979 21.9295 3.89979 21.0195 2.97979Z" fill="#E2F1E6"/>
+            <path d="M17.8591 10.4198C17.5891 10.2898 17.3291 10.1598 17.0891 10.0098C16.8891 9.88984 16.6891 9.75984 16.4991 9.61984C16.3391 9.51984 16.1591 9.36984 15.9791 9.21984C15.9591 9.20984 15.8991 9.15984 15.8191 9.07984C15.5091 8.82984 15.1791 8.48984 14.8691 8.11984C14.8491 8.09984 14.7891 8.03984 14.7391 7.94984C14.6391 7.83984 14.4891 7.64984 14.3591 7.43984C14.2491 7.29984 14.1191 7.09984 13.9991 6.88984C13.8491 6.63984 13.7191 6.38984 13.5991 6.12984C13.4691 5.84984 13.3691 5.58984 13.2791 5.33984L7.89912 10.7198C7.54912 11.0698 7.20912 11.7298 7.13912 12.2198L6.70912 15.1998C6.61912 15.8298 6.78912 16.4198 7.17912 16.8098C7.50912 17.1398 7.95912 17.3098 8.45912 17.3098C8.56912 17.3098 8.67912 17.2998 8.78912 17.2898L11.7591 16.8698C12.2491 16.7998 12.9091 16.4698 13.2591 16.1098L18.6391 10.7298C18.3891 10.6498 18.1391 10.5398 17.8591 10.4198Z" fill="#E2F1E6"/>
+          </svg>
+        </a>
+      }
 
-    @if(this.blog.Id_Utilisateur === this.user.get_user.id_Utilisateur){
-      <a routerLink="./edit" class="absolute top-0 right-0">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" fill="none">
-          <path opacity="0.4" d="M15.48 3H7.52C4.07 3 2 5.06 2 8.52V16.47C2 19.94 4.07 22 7.52 22H15.47C18.93 22 20.99 19.94 20.99 16.48V8.52C21 5.06 18.93 3 15.48 3Z" fill="#182524"/>
-          <path d="M21.0195 2.97979C19.2295 1.17979 17.4795 1.13979 15.6395 2.97979L14.5095 4.09979C14.4095 4.19979 14.3795 4.33979 14.4195 4.46979C15.1195 6.91979 17.0795 8.87979 19.5295 9.57979C19.5595 9.58979 19.6095 9.58979 19.6395 9.58979C19.7395 9.58979 19.8395 9.54979 19.9095 9.47979L21.0195 8.35979C21.9295 7.44979 22.3795 6.57979 22.3795 5.68979C22.3795 4.78979 21.9295 3.89979 21.0195 2.97979Z" fill="#E2F1E6"/>
-          <path d="M17.8591 10.4198C17.5891 10.2898 17.3291 10.1598 17.0891 10.0098C16.8891 9.88984 16.6891 9.75984 16.4991 9.61984C16.3391 9.51984 16.1591 9.36984 15.9791 9.21984C15.9591 9.20984 15.8991 9.15984 15.8191 9.07984C15.5091 8.82984 15.1791 8.48984 14.8691 8.11984C14.8491 8.09984 14.7891 8.03984 14.7391 7.94984C14.6391 7.83984 14.4891 7.64984 14.3591 7.43984C14.2491 7.29984 14.1191 7.09984 13.9991 6.88984C13.8491 6.63984 13.7191 6.38984 13.5991 6.12984C13.4691 5.84984 13.3691 5.58984 13.2791 5.33984L7.89912 10.7198C7.54912 11.0698 7.20912 11.7298 7.13912 12.2198L6.70912 15.1998C6.61912 15.8298 6.78912 16.4198 7.17912 16.8098C7.50912 17.1398 7.95912 17.3098 8.45912 17.3098C8.56912 17.3098 8.67912 17.2998 8.78912 17.2898L11.7591 16.8698C12.2491 16.7998 12.9091 16.4698 13.2591 16.1098L18.6391 10.7298C18.3891 10.6498 18.1391 10.5398 17.8591 10.4198Z" fill="#E2F1E6"/>
-        </svg>
-      </a>
+      <h1 class="text-4xl font-bold leadi md:text-5xl">{{ this.blog.Titre }}</h1>
+      <p class="text-sm">par
+        <!--
+         <a rel="noopener noreferrer" routerLink="/user/admin" class="underline">
+          <span itemprop="name">Admin</span>
+        </a> --->
+        <span rel="noopener noreferrer" class="underline">
+          <span itemprop="name">{{ nomC }}</span>
+        </span> le
+        <span>{{ dateToString(this.blog.DateCreation) }}</span>
+      </p>
+    </div>
+    <div class="">
+      <p>{{ this.blog.Descriptif }}</p>
+    </div>
+    <div class="pt-12 border-t">
+      <div class="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
+        <img src="assets/logo_simple.png" alt="" class="bg-color-background self-center p-2 flex-shrink-0 w-20 h-20 border rounded-full md:justify-self-start">
+        <div class="flex flex-col">
+          <h4 class="text-lg font-semibold">{{ nomC }}</h4>
+          <p class="">Je suis {{ nomC }} 😉</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h1 class="text-2xl font-bold leadi md:text-3xl">Message :</h1>
+
+    @for(entry of this.commentaires;track entry.Id_Message){
+
+      <div class="text-black relative flex flex-row max-w-2xl p-6 xl:flex-row border-b dark:text-white">
+        <div class="p-3 space-y-1 w-full">
+          <h3 class="text-3xl font-bold">{{entry.Titre}}</h3>
+          <h3 class="text-xl font-semibold">{{entry.Contenu}}</h3>
+          <p class="text-sm">de {{ this.userFind.getNomComplet(entry.Id_Utilisateur) }}</p>
+        </div>
+        <div class="flex-col items-center text-center min-w-20 gap-3 p-3">
+          <img alt="" src="assets/logo_simple.png" class="bg-color-background object-cover m-auto w-14 h-14 rounded-full shadow">
+          <div class="space-y-1">
+            <span class="text-xs">{{ dateToString(entry.DatePublication) }}</span>
+          </div>
+        </div>
+      </div>
     }
 
-    <h1 class="text-4xl font-bold leadi md:text-5xl">{{ this.blog.Titre }}</h1>
-    <p class="text-sm">par
-      <!--
-       <a rel="noopener noreferrer" routerLink="/user/admin" class="underline">
-        <span itemprop="name">Admin</span>
-      </a> --->
-      <span rel="noopener noreferrer" class="underline">
-        <span itemprop="name">Admin</span>
-      </span> le
-      <span>{{ this.blog.DateCreation.getDate() + ' ' + moisEnLettres(this.blog.DateCreation.getMonth()) + ' ' + this.blog.DateCreation.getFullYear() }}</span>
-    </p>
-  </div>
-  <div class="">
-    <p>{{ this.blog.Descriptif }}</p>
-  </div>
-  <div class="pt-12 border-t">
-    <div class="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
-      <img src="assets/logo_simple.png" alt="" class="bg-color-background self-center p-2 flex-shrink-0 w-20 h-20 border rounded-full md:justify-self-start">
-      <div class="flex flex-col">
-        <h4 class="text-lg font-semibold">Admin</h4>
-        <p class="">Je suis l'admin de l'app ! 😉</p>
+    @if(this.commentaires.length === 0){
+      <div class="flex gap-10 ">
+        <span class="w-max">Aucun commentaire</span>
       </div>
-    </div>
-
-  </div>
-
-  <h1 class="text-2xl font-bold leadi md:text-3xl">Message :</h1>
+    }
 
 
-  <div class="text-black relative flex flex-row max-w-2xl p-6 xl:flex-row border-b dark:text-white"><!-- rounded-2xl bg-green-400 --->
-    <div class="p-3 space-y-1 w-full">
-      <h3 class="text-3xl font-semibold">Bravo à toi !</h3>
-      <p class="text-sm">NOM Prenom</p>
-    </div>
-    <div class="flex-col items-center text-center min-w-20 gap-3 p-3">
-      <img alt="" src="https://source.unsplash.com/100x100/?portrait" class="object-cover m-auto w-14 h-14 rounded-full shadow">
-      <div class="space-y-1">
-        <span class="text-xs">14 février 2024</span>
+    <!-- Commentaire de Base -->
+    @if (this.blog.Id_Blog == 0 ){
+      <div class="text-black relative flex flex-row max-w-2xl p-6 xl:flex-row border-b dark:text-white"><!-- rounded-2xl bg-green-400 --->
+        <div class="p-3 space-y-1 w-full">
+          <h3 class="text-3xl font-semibold">Bravo à toi !</h3>
+          <p class="text-sm">NOM Prenom</p>
+        </div>
+        <div class="flex-col items-center text-center min-w-20 gap-3 p-3">
+          <img alt="" src="https://source.unsplash.com/100x100/?portrait" class="object-cover m-auto w-14 h-14 rounded-full shadow">
+          <div class="space-y-1">
+            <span class="text-xs">14 février 2024</span>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="text-black relative flex flex-row max-w-2xl p-6 xl:flex-row border-b dark:text-white"><!-- rounded-2xl bg-green-400 -->
-    <div class="p-3 space-y-1 w-full">
-      <h3 class="text-3xl font-semibold">Nice 😉</h3>
-      <p class="text-sm">NOM Prenom</p>
-    </div>
-    <div class="flex-col items-center text-center min-w-20 gap-3 p-3">
-      <img alt="" src="https://source.unsplash.com/100x100/?portrait" class="object-cover m-auto w-14 h-14 rounded-full shadow">
-      <div class="space-y-1">
-        <span class="text-xs">14 février 2024</span>
+      <div class="text-black relative flex flex-row max-w-2xl p-6 xl:flex-row border-b dark:text-white"><!-- rounded-2xl bg-green-400 -->
+        <div class="p-3 space-y-1 w-full">
+          <h3 class="text-3xl font-semibold">Nice 😉</h3>
+          <p class="text-sm">NOM Prenom</p>
+        </div>
+        <div class="flex-col items-center text-center min-w-20 gap-3 p-3">
+          <img alt="" src="https://source.unsplash.com/100x100/?portrait" class="object-cover m-auto w-14 h-14 rounded-full shadow">
+          <div class="space-y-1">
+            <span class="text-xs">14 février 2024</span>
+          </div>
+        </div>
       </div>
+
+    }
+
+    <div class="text-white text-center max-w-2xl p-6 rounded-2xl bg-color-background">
+      <form class="col-span-full">
+        <h4 class="text-xl pb-6">Nouveau commentaire : </h4>
+        @if (!this.user.isConnected() && this.blog.Id_Blog !== 0){
+        <div style="height: 150px">
+          <h2 class="mb-12">Vous devez être connecté pour mettre un commentaire 😉</h2>
+          <a [routerLink]="['/login']" [queryParams]="{ page: 'blog/' + blog.Id_Blog }" class="block px-8 py-3 m-2 text-lg font-semibold rounded bg-color-icon color-color-background transition hover:scale-110">Se connecter</a>
+        </div>
+        }@else if (this.blog.Id_Blog !== 0){
+          <input id="titre" type="text" placeholder="Titre" [formControl]="this.titre"
+                 class="w-full text-black my-4 focus:outline-none rounded-md focus:ring focus:ri dark:bg-neutral-800 dark:text-white p-2">
+
+          <textarea id="newCom" placeholder="Commentaire" [formControl]="this.contenu"
+                    class="w-full text-black focus:outline-none rounded-md focus:ring focus:ri focus:ri dark:bg-neutral-800 dark:text-white p-2"
+                    style="min-height: 10vh;height: 13vh;"></textarea>
+          <input type="submit" value="Envoyer" (click)="AddComm()"
+                 class="block px-6 py-2 mt-6 mx-auto font-semibold rounded bg-color-icon color-color-background transition hover:scale-110 cursor-pointer"/>
+        } @else{
+          <div style="height: 150px">
+            <h2>Commentaire indisponible sur cette page</h2>
+          </div>
+        }
+      </form>
     </div>
-  </div>
-
-  <div class="text-white text-center max-w-2xl p-6 rounded-2xl bg-color-background">
-    <form class="col-span-full">
-      <h4 class="text-xl pb-6">Nouveau commentaire : </h4>
-      <textarea id="newCom" placeholder="" class="w-full focus:outline-none rounded-md focus:ring focus:ri focus:ri text-black dark:bg-neutral-800 dark:text-white" style="min-height: 15vh;"></textarea>
-      <button type="button" class="block px-6 py-2 mt-6 mx-auto font-semibold rounded bg-color-icon color-color-background transition hover:scale-110">Envoyer</button>
-
-    </form>
-  </div>
-
+  } @else if (this.loading){
+    <div class="text-center">Chargement ... </div>
+  } @else {
+    <app-404 msg="Blog privé ou inaccessible" margin="non" />
+  }
 </article>

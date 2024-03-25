@@ -53,15 +53,15 @@ this.error
       </div>
 
       <div>
-        <label for="firstname" class="block mb-2 text-sm">Nom</label>
-        <input type="text" name="firstname" id="firstname" placeholder="Jean"
+        <label for="lastname" class="block mb-2 text-sm">Nom</label>
+        <input type="text" name="lastname" id="lastname" placeholder="DURANT"
                required minlength="4" #nomVerif=ngModel
                [(ngModel)]="this.utilisateur.nom"
                class="w-full px-3 py-2 border rounded text-center text-black">
       </div>
       <div>
-        <label for="lastname" class="block mb-2 text-sm">Prenom</label>
-        <input type="text" name="lastname" id="lastname" placeholder="DURANT"
+        <label for="firstname" class="block mb-2 text-sm">Prenom</label>
+        <input type="text" name="firstname" id="firstname" placeholder="Jean"
                required minlength="4" #prenomVerif=ngModel
                [(ngModel)]="this.utilisateur.prenom"
                class="w-full px-3 py-2 border rounded text-center text-black">
@@ -69,7 +69,7 @@ this.error
       <div>
         <label for="phonenumber" class="block mb-2 text-sm">Numéro</label>
         <input type="number" name="phonenumber" id="phonenumber" placeholder="0612345678"
-               required min="0600000000" max=0799999999 #numeroVerif=ngModel
+               required min="0100000000" max=0999999999 #numeroVerif=ngModel
                [(ngModel)]="this.utilisateur.numero"
                class="w-full px-3 py-2 border rounded text-center text-black">
       </div>

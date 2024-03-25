@@ -8,7 +8,8 @@ const connection = mysql.createConnection({
     port: 3306,
     user: 'root',
     password: 'Meaux2Passe',
-    database: 'triceratops_bd'
+    database: 'triceratops_bd',
+    charset: 'utf8mb4'
 });
 //Fonction de connexion avec gestion d'erreur
 function connexion(){

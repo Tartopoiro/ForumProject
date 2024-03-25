@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from "../api/api-service.service";
 import {Utilisateur} from "../../Class/Utilisateur/utilisateur";
-import {CanActivateFn, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
@@ -9,8 +9,12 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class UserService {
 
+  // Indique si l'utilisateur est connecté
   private connected: boolean = false;
+  // Indique si une opération est en cours de chargement
+  private loading : boolean = false;
 
+  // Contient les informations de l'utilisateur connecté, s'il y en a un
   private user: Utilisateur | undefined;
 
   constructor(private api:ApiService, private router:Router) {
@@ -21,18 +25,21 @@ export class UserService {
     let dateStr = localStorage.getItem("dateCo") || undefined
     let email = localStorage.getItem("email") || undefined
 
-
+    // Vérification si des informations de connexion sont présentes et si la dernière connexion est récente
     if(email != undefined && dateStr != undefined){
       // Timeout en minute entre heure actuelle <-> heure de dernière connexion
       const differenceInMinutes = Math.abs((currentDate.getTime() - parseInt(dateStr)) / (1000 * 60));
 
+      // Si la différence est inférieure à 30 minutes, l'utilisateur est automatiquement connecté
       if(differenceInMinutes < 30 ) this.connexion(email,false)
       else console.log("Timeout connexion ( > 30 min)")
-      // else -> Pas de connexion
+      // Sinon, l'utilisateur n'est pas automatiquement connecté
     }
   }
 
+  // Méthode de connexion de l'utilisateur
   public async connexion(mail: string, redirect: boolean) {
+    this.loading = true;
     if (await this.api.apiWork()) {
       this.api.getUserByEmail(mail).subscribe((data: any) => {
         //console.log(data);
@@ -54,24 +61,24 @@ export class UserService {
           console.log("user introuvable !")
           this.connected = false
         }
+        this.loading = false;
       })
     }
   }
 
+  // Méthode d'inscription d'un nouvel utilisateur
   public async inscription(utilisateur: Utilisateur) {
+    this.loading = true;
     if (await this.api.apiWork()) {
       this.api.createUser(utilisateur).subscribe( {
         next: (data: any) => {
           // Debug
           //console.log(data)
 
-          this.user = utilisateur;
+          this.connexion(utilisateur.email, false)
           this.connected = true
 
           this.router.navigateByUrl("/")
-
-          localStorage.setItem("email", this.user.email);
-          localStorage.setItem("dateCo", String(Date.now()))
         },
         error: (error: HttpErrorResponse) => {
           console.error('Erreur HTTP :', error.status);
@@ -80,13 +87,15 @@ export class UserService {
       })
     }
 
+    this.loading = false;
     return this.connected;
   }
 
+  // Méthode de mise à jour du profil utilisateur
   public async mettreAJourProfil(utilisateur: Utilisateur){
     if (await this.api.apiWork()) {
       this.api.updateUser(utilisateur).subscribe((data: any) => {
-        console.log(data);
+        //console.log(data);
 
         if(data.message && data.message == "User created"){
 
@@ -104,10 +113,17 @@ export class UserService {
     }
   }
 
+  // Méthode pour vérifier si un utilisateur est connecté
   public isConnected(){
     return this.connected;
   }
 
+  // Méthode pour vérifier si une opération est en cours de chargement
+  public isloading(){
+    return this.loading;
+  }
+
+  // Méthode de déconnexion de l'utilisateur
   public logout(){
     this.router.navigateByUrl("/")
     this.connected = false
@@ -115,11 +131,11 @@ export class UserService {
     localStorage.clear()
   }
 
+  // Getter pour récupérer les informations de l'utilisateur connecté
   get get_user(){
     if(this.user != undefined)
       return this.user;
 
     return new Utilisateur({})
   }
-
 }

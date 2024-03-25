@@ -2,12 +2,13 @@ const {requeteOut, requeteIn} = require("../mysqlConnection");
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const {convertUnicode} = require("../convertUnicode");
 
 
 app.get('/api/user', async (req, res) => {
     const mail = req.query.mail;
     try{
-        const query = 'call getUserFromMail(\''+mail+'\')';
+        const query = 'call getUserFromMail(\''+convertUnicode(mail)+'\')';
         const result = await requeteOut(query);
         res.json(result);
     } catch (e) {
@@ -35,7 +36,8 @@ app.post('/api/user',bodyParser.json(), async (req, res) => {
     const numero = req.body['Numero'];
 
     try{
-        const query = 'CALL create_user(\''+nom+'\',\''+prenom+'\',\''+mail+'\','+numero+')';
+        const query = 'CALL create_user(\''+convertUnicode(nom)+'\',\''+convertUnicode(prenom)+
+            '\',\''+convertUnicode(mail)+'\','+convertUnicode(numero)+')';
         await requeteIn(query);
         res.status(200).send({message : "User created"});
     }catch (e) {
@@ -51,7 +53,8 @@ app.patch('/api/user',bodyParser.json(), async (req, res) => {
     const numero = req.body['Numero'];
 
     try{
-        const query = 'CALL update_user(\''+nom+'\',\''+prenom+'\',\''+mail+'\','+numero+')';
+        const query = 'CALL update_user(\''+convertUnicode(nom)+'\',\''+convertUnicode(prenom)+
+            '\',\''+convertUnicode(mail)+'\','+convertUnicode(numero)+')';
         await requeteIn(query);
         res.status(200).send({message : "User created"});
     }catch (e) {

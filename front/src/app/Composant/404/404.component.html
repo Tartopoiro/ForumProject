@@ -1,11 +1,11 @@
-<section class="flex items-center h-full p-16">
+<section id="404page" class="flex items-center h-full p-16" [class.p-16] = "margin === 'oui' ">
   <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
     <div class="max-w-md text-center">
       <h2 class="mb-8 font-extrabold text-9xl text-green-400">
         <span class="sr-only">Erreur</span>404
       </h2>
-      <p class="text-2xl font-semibold md:text-3xl">Désolé, nous n’avons pas trouvé cette page.</p>
-      <p class="mt-4 mb-8">Mais ne vous inquiétez pas, vous pouvez trouver beaucoup d’autres choses sur notre page d’accueil.</p>
+      <p class="text-2xl font-semibold md:text-3xl">{{ msg }}</p>
+      <p class="mt-4 mb-8">{{ msg2 }}</p>
       <a rel="noopener noreferrer" routerLink="/"
          class="inline-block px-8 py-3 font-semibold rounded bg-color-icon color-color-background transition hover:scale-110">Retour à l'accueil</a>
     </div>

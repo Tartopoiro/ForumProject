@@ -2,11 +2,12 @@ const {requeteOut, requeteIn} = require("../mysqlConnection");
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const {convertUnicode} = require("../convertUnicode");
 //Renvoie tout les messages d'un blog passé, param : idblog (URL)
 app.get('/api/message', async (req, res) => {
     const blog = req.query.idblog;
     try{
-        const query = 'call getMessageFromBlog('+blog+')';
+        const query = 'call getMessagesFromBlog('+convertUnicode(blog)+')';
         const result = await requeteOut(query);
         res.json(result);
     } catch (e) {
@@ -22,7 +23,8 @@ app.post('/api/message',bodyParser.json(), async (req, res) => {
     const user = req.body['IdUser'];
 
     try{
-        const query = 'CALL create_message(\''+contenu+'\',\''+titre+'\','+blog+','+user+')';
+        const query = 'CALL create_message(\''+convertUnicode(contenu)+'\',\''+convertUnicode(titre)+'\','+
+            convertUnicode(blog)+','+convertUnicode(user)+')';
         await requeteIn(query);
         res.status(200).send({message : "User created"});
     }catch (e) {
