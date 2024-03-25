@@ -5,7 +5,12 @@ const bodyParser = require('body-parser');
 const {convertUnicode} = require("../convertUnicode");
 //Renvoie tout les messages d'un blog passé, param : idblog (URL)
 app.get('/api/message', async (req, res) => {
-    const blog = req.query.idblog;
+    try {
+        const blog = req.query.idblog;
+    } catch (e) {
+        res.status(500).send({message: "formatage de la requete incorrect"});
+    }
+
     try{
         const query = 'call getMessagesFromBlog('+convertUnicode(blog)+')';
         const result = await requeteOut(query);
@@ -17,10 +22,14 @@ app.get('/api/message', async (req, res) => {
 });
 //Archive en BdD un message avec un titre, un contenu, un user et un blog (JSON)
 app.post('/api/message',bodyParser.json(), async (req, res) => {
-    const contenu = req.body['Contenu'];
-    const titre = req.body['Titre'];
-    const blog = req.body['IdBlog'];
-    const user = req.body['IdUser'];
+    try {
+        const contenu = req.body['Contenu'];
+        const titre = req.body['Titre'];
+        const blog = req.body['IdBlog'];
+        const user = req.body['IdUser'];
+    } catch (e) {
+        res.status(500).send({message: "formatage de la requete incorrect"});
+    }
 
     try{
         const query = 'CALL create_message(\''+convertUnicode(contenu)+'\',\''+convertUnicode(titre)+'\','+

@@ -4,9 +4,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const {convertUnicode} = require("../convertUnicode");
 
-
+//Renvoie un utilisateur avec son mail (URL)
 app.get('/api/user', async (req, res) => {
-    const mail = req.query.mail;
+    try {
+        const mail = req.query.mail;
+    } catch (e) {
+        res.status(500).send({message: "formatage de la requete incorrect"});
+    }
+
     try{
         const query = 'call getUserFromMail(\''+convertUnicode(mail)+'\')';
         const result = await requeteOut(query);
@@ -16,7 +21,7 @@ app.get('/api/user', async (req, res) => {
         console.error('erreur lors de la recherche de user ', e);
     }
 });
-
+//Renvoie tous les utilisateurs
 app.get('/api/users', async (req, res) => {
     try{
         const query = 'call getUsers()';
@@ -28,12 +33,16 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
-
+//Créer un utilisateur avec les données issue du JSON
 app.post('/api/user',bodyParser.json(), async (req, res) => {
-    const mail = req.body['Email'];
-    const nom = req.body['Nom'];
-    const prenom = req.body['Prenom'];
-    const numero = req.body['Numero'];
+    try {
+        const mail = req.body['Email'];
+        const nom = req.body['Nom'];
+        const prenom = req.body['Prenom'];
+        const numero = req.body['Numero'];
+    } catch (e) {
+        res.status(500).send({message: "formatage de la requete incorrect"});
+    }
 
     try{
         const query = 'CALL create_user(\''+convertUnicode(nom)+'\',\''+convertUnicode(prenom)+
@@ -45,12 +54,16 @@ app.post('/api/user',bodyParser.json(), async (req, res) => {
         console.error('erreur lors de la creation de user ', e);
     }
 });
-
+//Modifie un utilisateur avec les données issue du JSON
 app.patch('/api/user',bodyParser.json(), async (req, res) => {
-    const mail = req.body['Email'];
-    const nom = req.body['Nom'];
-    const prenom = req.body['Prenom'];
-    const numero = req.body['Numero'];
+    try {
+        const mail = req.body['Email'];
+        const nom = req.body['Nom'];
+        const prenom = req.body['Prenom'];
+        const numero = req.body['Numero'];
+    } catch (e) {
+        res.status(500).send({message: "formatage de la requete incorrect"});
+    }
 
     try{
         const query = 'CALL update_user(\''+convertUnicode(nom)+'\',\''+convertUnicode(prenom)+
