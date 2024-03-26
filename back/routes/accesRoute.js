@@ -6,8 +6,9 @@ const {convertUnicode} = require("../convertUnicode");
 
 //renvoie tous les accès d'un blog (URL)
 app.get('/api/acces', async (req, res) => {
+    let id;
     try {
-        const id = req.query.idblog;
+        id = req.query.idblog;
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
@@ -23,9 +24,11 @@ app.get('/api/acces', async (req, res) => {
 });
 //Creer un accès avec un user et un blog issue du JSON
 app.post('/api/acces', bodyParser.json(), async (req,res)=>{
+    let user;
+    let blog;
     try {
-        const user = req.body['IdUser'];
-        const blog = req.body['IdBlog'];
+        user = req.body['IdUser'];
+        blog = req.body['IdBlog'];
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
@@ -41,9 +44,11 @@ app.post('/api/acces', bodyParser.json(), async (req,res)=>{
 });
 //Supprime un accès avec un user et un blog issue du JSON
 app.delete('/api/acces', bodyParser.json(), async (req,res)=>{
+    let user;
+    let blog;
     try {
-        const user = req.body['IdUser'];
-        const blog = req.body['IdBlog'];
+        user = req.body['IdUser'];
+        blog = req.body['IdBlog'];
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
