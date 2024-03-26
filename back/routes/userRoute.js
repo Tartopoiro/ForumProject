@@ -6,8 +6,10 @@ const {convertUnicode} = require("../convertUnicode");
 
 //Renvoie un utilisateur avec son mail (URL)
 app.get('/api/user', async (req, res) => {
+    let mail;
+
     try {
-        const mail = req.query.mail;
+        mail = req.query.mail;
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
@@ -35,11 +37,15 @@ app.get('/api/users', async (req, res) => {
 
 //Créer un utilisateur avec les données issue du JSON
 app.post('/api/user',bodyParser.json(), async (req, res) => {
+    let mail;
+    let nom;
+    let prenom;
+    let numero;
     try {
-        const mail = req.body['Email'];
-        const nom = req.body['Nom'];
-        const prenom = req.body['Prenom'];
-        const numero = req.body['Numero'];
+        mail = req.body['Email'];
+        nom = req.body['Nom'];
+        prenom = req.body['Prenom'];
+        numero = req.body['Numero'];
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
@@ -56,11 +62,16 @@ app.post('/api/user',bodyParser.json(), async (req, res) => {
 });
 //Modifie un utilisateur avec les données issue du JSON
 app.patch('/api/user',bodyParser.json(), async (req, res) => {
+    let mail;
+    let nom;
+    let prenom;
+    let numero;
+
     try {
-        const mail = req.body['Email'];
-        const nom = req.body['Nom'];
-        const prenom = req.body['Prenom'];
-        const numero = req.body['Numero'];
+        mail = req.body['Email'];
+        nom = req.body['Nom'];
+        prenom = req.body['Prenom'];
+        numero = req.body['Numero'];
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
