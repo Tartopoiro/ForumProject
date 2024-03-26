@@ -6,9 +6,12 @@ const {convertUnicode} = require("../convertUnicode");
 
 //Renvoie un blog selon l'id en parametre seulement si l'utilisateur y a accès
 app.post('/api/getBlog', bodyParser.json(), async (req, res) => {
+    let user;
+    let blog;
+
     try {
-        const user = req.body['IdUser'];
-        const blog = req.body['IdBlog'];
+        user = req.body['IdUser'];
+        blog = req.body['IdBlog'];
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
@@ -24,17 +27,22 @@ app.post('/api/getBlog', bodyParser.json(), async (req, res) => {
 });
 //Créer un blog avec les informations contenues dans le JSON
 app.post('/api/blog', bodyParser.json(), async (req,res)=>{
+    let public_v ;
+    let titre;
+    let user;
+    let descriptif;
+
     try {
-        const public = req.body['Public'];
-        const titre = req.body['Titre'];
-        const user = req.body['IdUser'];
-        const descriptif = req.body['Descriptif'];
+        public_v = req.body['Public'];
+        titre = req.body['Titre'];
+        user = req.body['IdUser'];
+        descriptif = req.body['Descriptif'];
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
 
     try{
-        const query = 'CALL create_blog('+convertUnicode(public)+',\''+convertUnicode(titre)+'\',\''+
+        const query = 'CALL create_blog('+convertUnicode(public_v)+',\''+convertUnicode(titre)+'\',\''+
             convertUnicode(descriptif)+'\','+convertUnicode(user)+')';
         await requeteIn(query);
         res.status(200).send({message : "Blog created"});
@@ -45,17 +53,22 @@ app.post('/api/blog', bodyParser.json(), async (req,res)=>{
 });
 //Mets à jour un blog avec les informations transmis dans le JSON
 app.patch('/api/blog', bodyParser.json(), async (req,res)=>{
+    let public_v;
+    let titre;
+    let blog;
+    let descriptif;
+
     try {
-        const public = req.body['Public'];
-        const titre = req.body['Titre'];
-        const blog = req.body['IdBlog'];
-        const descriptif = req.body['Descriptif'];
+        public_v = req.body['Public'];
+        titre = req.body['Titre'];
+        blog = req.body['IdBlog'];
+        descriptif = req.body['Descriptif'];
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
 
     try{
-        const query = 'CALL update_blog('+convertUnicode(blog)+','+convertUnicode(public)+
+        const query = 'CALL update_blog('+convertUnicode(blog)+','+convertUnicode(public_v)+
             ',\''+convertUnicode(titre)+'\',\''+convertUnicode(descriptif)+'\')';
         await requeteIn(query);
         res.status(200).send({message : "Blog created"});
@@ -66,8 +79,10 @@ app.patch('/api/blog', bodyParser.json(), async (req,res)=>{
 });
 //Renvoie tous les blogs créer par un user (URL)
 app.get('/api/userblog', async (req, res) => {
+    let id;
+
     try {
-        const id = req.query.iduser;
+        id = req.query.iduser;
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
@@ -83,8 +98,10 @@ app.get('/api/userblog', async (req, res) => {
 });
 //Renvoie tous les blogs accessible par l'utilisateur (URL)
 app.get('/api/accessibleblog', async (req, res) => {
+    let id;
+
     try {
-        const id = req.query.iduser;
+        id = req.query.iduser;
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
@@ -100,8 +117,10 @@ app.get('/api/accessibleblog', async (req, res) => {
 });
 //Supprime un blog (URL)
 app.get('/api/deleteblog', async (req, res) => {
+    let id;
+
     try {
-        const id = req.query.idblog;
+        id = req.query.idblog;
     } catch (e) {
         res.status(500).send({message: "formatage de la requete incorrect"});
     }
